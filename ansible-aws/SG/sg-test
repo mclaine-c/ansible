@@ -1,0 +1,54 @@
+- name: example using security group rule descriptions
+  ec2_group:
+    name: "{{ name }}"
+    description: sg with rule descriptions
+    vpc_id: vpc-347f5d4f
+    profile: "{{ aws_profile }}"
+    region: us-east-1
+    rules:
+      - proto: tcp
+        ports:
+        - 80
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow all on port 80
+
+- name: example ec2 group
+  ec2_group:
+    name: example
+    description: an example EC2 group
+    vpc_id: vpc-3475d4f
+    region: us-east-1
+    rules:
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 10.0.0.0/8
+      - proto: tcp
+        from_port: 3306
+        to_port: 3306
+        group_id: sg-49994901
+      - proto: udp
+        from_port: 10050
+        to_port: 10050
+        cidr_ip: 10.0.0.0/8
+      - proto: udp
+        from_port: 10051
+        to_port: 10051
+        group_id: sg-12345678
+      - proto: icmp
+        from_port: 8 # icmp type, -1 = any type
+        to_port:  -1 # icmp subtype, -1 = any subtype
+        cidr_ip: 10.0.0.0/8
+      - proto: all
+        # the containing group name may be specified here
+        group_name: example
+      - proto: all
+        # in the 'proto' attribute, if you specify -1, all, or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6),
+        # traffic on all ports is allowed, regardless of any ports you specify
+        from_port: 10050 # this value is ignored
+        to_port: 10050 # this value is ignored
+        cidr_ip: 10.0.0.0/8
