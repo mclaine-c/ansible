@@ -18,7 +18,5 @@
         name: '{{ ec2_group_name }}'
         description: '{{ ec2_group_description }}'
         vpc_id: '{{ ec2_group_vpc }}'
-        aws_access_key: '{{ access_key }}'
-        aws_secret_key: '{{ secret_key }}'
         region: '{{ ec2_group_region }}'
         rules: '{{ rule_list }}'
