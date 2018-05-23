@@ -1,60 +1,55 @@
 ---
-- name: My System | Provision all required infrastructure
-  hosts: localhost
-  connection: local
-  gather_facts: no
-  vars:
-    my_vpc_name: "TEST"
-    my_vpc_region: "us-east-1"
-    my_vpc_cidr: "172.31.0.0/16"
-    everywhere_cidr: "0.0.0.0/0"
+- name: example using security group rule descriptions
+  ec2_group:
+    name: "{{ name }}"
+    description: sg with rule descriptions
+    vpc_id: vpc-347f5d4f
+    profile: "{{ aws_profile }}"
+    region: us-east-1
+    rules:
+      - proto: tcp
+        ports:
+        - 80
+        cidr_ip: 0.0.0.0/0
+        rule_desc: allow all on port 80
 
-    # Inbound security groups, e.g. public facing services like a load balancer
-    my_inbound_security_groups:
-      - sg_name: SG-TEST
-        sg_description: allow http and https access (public)
-        sg_rules:
-          - proto: tcp
-            from_port: 80
-            to_port: 80
-            cidr_ip: "{{ everywhere_cidr }}"
-
-          - proto: tcp
-            from_port: 443
-            to_port: 443
-            cidr_ip: "{{ everywhere_cidr }}"
-
-      # Only allow SSH access from within the VPC, to access any services within the VPC you would need to create a
-      # temporary bastion host
-      - sg_name: inbound-ssh
-        sg_description: allow ssh access
-        sg_rules:
-         - proto: tcp
-           from_port: 22
-           to_port: 22
-           cidr_ip: "{{ my_vpc_cidr }}"
-
-    # Internal inbound security groups, e.g. services which should not be directly accessed outside the VPC, such as
-    # the web servers behind the load balancer.
-    #
-    # This has to be a file as it needs to be dynamically included after the inbound security groups have been created
-    my_internal_inbound_security_groups_file: "internal-securitygroups.yml"
-
-    # Outbound rules, e.g. what services can the web servers access by themselves
-    my_outbound_security_groups:
-      - sg_name: outbound-all
-        sg_description: allows outbound traffic to any IP address
-        sg_rules:
-          - proto: all
-            cidr_ip: "{{ everywhere_cidr }}"
-  roles:
- 
-    # Provision security groups
-    - {
-        role: daniel-rhoades.aws-security-groups,
-        vpc_region: "{{ my_vpc_region }}",
-        vpc_id: "{{ vpc.vpc_id }}",
-        ec2_group_inbound_sg: "{{ my_inbound_security_groups }}",
-        ec2_group_internal_inbound_sg_file: "{{ my_internal_inbound_security_groups_file }}",
-        ec2_group_outbound_sg: "{{ my_outbound_security_groups }}"
-      }
+- name: example ec2 group
+  ec2_group:
+    name: example
+    description: an example EC2 group
+    vpc_id: vpc-3475d4f
+    region: us-east-1
+    rules:
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 10.0.0.0/8
+      - proto: tcp
+        from_port: 3306
+        to_port: 3306
+        group_id: sg-49994901
+      - proto: udp
+        from_port: 10050
+        to_port: 10050
+        cidr_ip: 10.0.0.0/8
+      - proto: udp
+        from_port: 10051
+        to_port: 10051
+        group_id: sg-12345678
+      - proto: icmp
+        from_port: 8 # icmp type, -1 = any type
+        to_port:  -1 # icmp subtype, -1 = any subtype
+        cidr_ip: 10.0.0.0/8
+      - proto: all
+        # the containing group name may be specified here
+        group_name: example
+      - proto: all
+        # in the 'proto' attribute, if you specify -1, all, or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6),
+        # traffic on all ports is allowed, regardless of any ports you specify
+        from_port: 10050 # this value is ignored
+        to_port: 10050 # this value is ignored
+        cidr_ip: 10.0.0.0/8
