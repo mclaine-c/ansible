@@ -1,0 +1,27 @@
+---
+- name: Configure firewall policies
+  hosts: syrus-mdf-fw1
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+  vars:
+    build_dir: "/tmp/"
+    address_entries: [ {'name':'CENTOS','prefix':'172.16.0.10/32'} ]
+    fw_policy_info: [ {'policy_name':'Allow_Policy','src_zone':'TRUST_HECTOR','dst_zone':'untrust','src_ips':['CENTOS'],'dst_ips':['any'],'action':'permit','apps':['junos-http','junos-ping','junos-ssh','junos-https']}]
+
+  tasks:
+    - name: Build address book entries
+      template: src=templates/fw_address_book.set.j2 dest={{build_dir}}fw_address_book.set
+      with_items: address_entries
+
+    - name: Apply address book entries
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}fw_address_book.set overwrite=no logfile=logs/{{ inventory_hostname }}.log
+
+
+    - name: Build firewall policies config template
+      template: src=templates/fw_policy.set.j2 dest={{build_dir}}/fw_policy.set
+      with_items: fw_policy_info
+
+    - name: Apply firewall policies
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}fw_policy.set overwrite=no timeout=300 logfile=logs/{{ inventory_hostname }}.log
