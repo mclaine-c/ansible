@@ -4,8 +4,9 @@
     - name: Create security group
       ec2_group:
           name: "test_security_group"
-          description: "Test security group"
+          description: "SG-TEST"
           region: "us-east-1"
+          vpc-id: "sg-49994901"
           rules:
               - proto: tcp
                 from_port: 22
