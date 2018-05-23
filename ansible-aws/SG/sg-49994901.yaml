@@ -12,9 +12,6 @@
     ec2_group_description: 'This is a description'
     ec2_group_name: 'sg-49994901'
 
-  vars_files:
-    - vars/aws_config.yml
-
   tasks:
     - name: Change security group
       ec2_group:
