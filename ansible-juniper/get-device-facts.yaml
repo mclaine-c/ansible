@@ -1,6 +1,6 @@
 ---
 - name: Get Device Facts
-  hosts: vsrx
+  hosts: syrus-mdf-fw1
   roles:
     - Juniper.junos
   connection: local
