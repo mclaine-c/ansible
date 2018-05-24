@@ -8,7 +8,7 @@
       ec2_vpc_vgw:
         state: present
         region: us-east-1
-        profile: personal
+        #profile: personal
         vpc_id: vpc-347f5d4f
         name: personal-testing
         type: ipsec.1
