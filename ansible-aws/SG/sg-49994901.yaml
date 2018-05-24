@@ -4,11 +4,10 @@
   tasks:
     - name: Create security group
       ec2_group:
-          name: "test_security_group"
           description: "SG-TEST"
           region: "us-east-1"
           vpc_id: "vpc-347f5d4f"
-          name: "SG-TEST"
+          name: "SG-TEST1"
           rules:
               - proto: tcp
                 from_port: 22
@@ -30,5 +29,4 @@
                 from_port: 67
                 to_port: 67
                 cidr_ip: 10.0.0.0/8
-                description: "test"
       register: basic_firewall
