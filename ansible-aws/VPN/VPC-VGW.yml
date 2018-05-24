@@ -1,0 +1,16 @@
+
+---
+- name: My System | Provision all required infrastructure
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Create new VGW attached to VPC
+      ec2_vpc_vgw:
+        state: present
+        region: us-east-1
+        profile: personal
+        vpc_id: vpc-347f5d4f
+        name: personal-testing
+        type: ipsec.1
+     register: created_vgw
