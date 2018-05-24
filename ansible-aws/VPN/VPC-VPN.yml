@@ -11,6 +11,6 @@
         vpn_gateway_id: vgw-0b2749bcec21edc1a
         customer_gateway_id: cgw-0e2956b0d830cd440
         filters:
-          bgp: 65301
+          bgp: 65300
       register: vpn_gateway_id
   
