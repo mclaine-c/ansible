@@ -34,4 +34,9 @@
                 to_port: 68
                 cidr_ip: 10.0.0.0/8
                 #test comment
+              - proto: all
+                to_port: 71
+                cidr_ip: 10.0.0.0/8
+                #test comment
+
       register: basic_firewall
