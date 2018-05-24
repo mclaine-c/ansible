@@ -10,3 +10,7 @@
         region: us-east-1
         vpn_gateway_id: vgw-0b2749bcec21edc1a
         customer_gateway_id: cgw-0e2956b0d830cd440
+
+    - name: Print stats
+      debug:
+        var:ec2_outside_ip_address
