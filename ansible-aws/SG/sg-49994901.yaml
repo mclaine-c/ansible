@@ -29,4 +29,9 @@
                 from_port: 67
                 to_port: 67
                 cidr_ip: 10.0.0.0/8
+              - proto: tcp
+                from_port: 69
+                to_port: 69
+                cidr_ip: 10.0.0.0/8
+
       register: basic_firewall
