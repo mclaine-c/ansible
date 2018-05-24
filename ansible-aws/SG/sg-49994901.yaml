@@ -4,7 +4,7 @@
     - name: Create security group
       ec2_group:
           name: "default"
-          description: "default"
+          description: "default1"
           region: "us-east-1"
           vpc_id: "vpc-347f5d4f""
           rules:
