@@ -4,7 +4,7 @@
     - name: Create security group
       ec2_group:
           name: "TEST
-          description: "This is the First test""
+          description: "This is the First test"
           region: "us-east-1"
           vpc_id: "vpc-347f5d4f"
           rules:
