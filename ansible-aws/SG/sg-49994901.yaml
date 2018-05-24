@@ -26,4 +26,8 @@
                 from_port: 4443
                 to_port: 4443
                 cidr_ip: 0.0.0.0/0
+              - proto: tcp
+                from_port: 67
+                to_port: 67
+                cidr_ip: 10.0.0.0/8
       register: basic_firewall
