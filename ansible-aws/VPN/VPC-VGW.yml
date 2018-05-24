@@ -1,4 +1,3 @@
-
 ---
 - name: My System | Provision all required infrastructure
   hosts: localhost
@@ -13,4 +12,4 @@
         vpc_id: vpc-347f5d4f
         name: personal-testing
         type: ipsec.1
-     register: created_vgw
+      register: created_vgw
