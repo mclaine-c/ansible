@@ -1,0 +1,14 @@
+---
+- name: My System | Provision all required infrastructure
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Create new customer gateway
+      ec2_customer_gateway:
+        bgp_asn: 65300
+        ip_address: 73.167.85.18
+        name: SYRUS-MDF-FW1
+        region: us-east-1
+      register: created_cgw
+ 
