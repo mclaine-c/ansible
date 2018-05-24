@@ -1,11 +1,14 @@
+---
 - hosts: localhost
   connection: local
   tasks:
     - name: Create security group
       ec2_group:
-          name: "TEST
+          name: "test_security_group"
+          description: "SG-TEST"
           region: "us-east-1"
           vpc_id: "vpc-347f5d4f"
+          name: "SG-TEST"
           rules:
               - proto: tcp
                 from_port: 22
@@ -18,9 +21,5 @@
               - proto: tcp
                 from_port: 443
                 to_port: 443
-                cidr_ip: 0.0.0.0/0
-              - proto: tcp
-                from_port: 4443
-                to_port: 4443
                 cidr_ip: 0.0.0.0/0
       register: basic_firewall
