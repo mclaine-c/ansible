@@ -6,7 +6,7 @@
           name: "test_security_group"
           description: "SG-TEST"
           region: "us-east-1"
-          vpc-id: "sg-49994901"
+          vpc_id: "sg-49994901"
           rules:
               - proto: tcp
                 from_port: 22
