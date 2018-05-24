@@ -10,33 +10,189 @@
           name: "default"
           rules:
               - proto: tcp
-                from_port: 22
-                to_port: 22
-                cidr_ip: 0.0.0.0/0
+                from_port: 3389
+                to_port: 3389
+                cidr_ip: 10.49.128.16/32
+                #RDP from PHL-DU-DORDS1
+              - proto: udp
+                from_port: 123
+                to_port: 123
+                cidr_ip: 10.49.128.5/32
+                #NTP from PHL-DU-DSDC1 (CUST-AS-DOMAIN-MEMBER)
               - proto: tcp
-                from_port: 80
-                to_port: 80
-                cidr_ip: 0.0.0.0/0
-              - proto: tcp
-                from_port: 4431
-                to_port: 4431
-                cidr_ip: 0.0.0.0/0
-              - proto: tcp
-                from_port: 4443
-                to_port: 4443
-                cidr_ip: 0.0.0.0/0
-              - proto: tcp
-                from_port: 67
-                to_port: 67
-                cidr_ip: 10.0.0.0/8
-              - proto: tcp
-                from_port: 68
-                to_port: 68
-                cidr_ip: 10.0.0.0/8
-                #test comment
+                from_port: 445
+                to_port: 445
+                cidr_ip: 10.49.128.5/32
+                #SMB from PHL-DU-DSDC1 from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER)
               - proto: all
-                to_port: 71
-                cidr_ip: 10.0.0.0/8
-                #test comment
-
+                from_port: 88
+                to_port: 88
+                cidr_ip: 10.49.128.5/32
+                #CUST-KERBEROS-TCP/UDP from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 464
+                to_port: 464
+                cidr_ip: 10.49.128.5/32
+                #CUST-KERBEROS-PASSWORD-CHANGE-TCP/UDP from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 53
+                to_port: 53
+                cidr_ip: 10.49.128.5/32
+                #DNS-TCP/UDP from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER)
+              - proto: udp
+                from_port: 389
+                to_port: 389
+                cidr_ip: 10.49.128.5/32
+                #CUST-LDAP-UDP from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 636
+                to_port: 636
+                cidr_ip: 10.49.128.5/32
+                #CUST-LDAP-SSL from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 1688
+                to_port: 1688
+                cidr_ip: 10.49.128.5/32
+                #CUST-WINDOWS-ACTIVATION from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER) 
+              - proto: tcp
+                from_port: 1024
+                to_port: 65535
+                cidr_ip: 10.49.128.5/32
+                #CUST-RPC-TCP from PHL-DU-DSDC1(CUST-AS-DOMAIN-MEMBER)                                                                            
+              - proto: udp
+                from_port: 123
+                to_port: 123
+                cidr_ip: 10.49.128.6/32
+                #NTP from PHL-DU-DSDC2 (CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 445
+                to_port: 445
+                cidr_ip: 10.49.128.6/32
+                #SMB from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 88
+                to_port: 88
+                cidr_ip: 10.49.128.6/32
+                #CUST-KERBEROS-TCP/UDP from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 464
+                to_port: 464
+                cidr_ip: 10.49.128.6/32
+                #CUST-KERBEROS-PASSWORD-CHANGE-TCP/UDP from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 53
+                to_port: 53
+                cidr_ip: 10.49.128.6/32
+                #DNS-TCP/UDP from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER)
+              - proto: udp
+                from_port: 389
+                to_port: 389
+                cidr_ip: 10.49.128.6/32
+                #CUST-LDAP-UDP from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 636
+                to_port: 636
+                cidr_ip: 10.49.128.6/32
+                #CUST-LDAP-SSL from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 1688
+                to_port: 1688
+                cidr_ip: 10.49.128.6/32
+                #CUST-WINDOWS-ACTIVATION from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER) 
+              - proto: tcp
+                from_port: 1024
+                to_port: 65535
+                cidr_ip: 10.49.128.6/32
+                #CUST-RPC-TCP from PHL-DU-DSDC2(CUST-AS-DOMAIN-MEMBER)  
+              - proto: udp
+                from_port: 123
+                to_port: 123
+                cidr_ip: 10.1.1.41/32
+                #NTP from MFD-DEV-DOM1 (CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 445
+                to_port: 445
+                cidr_ip: 10.1.1.41/32
+                #SMB from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 88
+                to_port: 88
+                cidr_ip: 10.1.1.41/32
+                #CUST-KERBEROS-TCP/UDP from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 464
+                to_port: 464
+                cidr_ip: 10.1.1.41/32
+                #CUST-KERBEROS-PASSWORD-CHANGE-TCP/UDP from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 53
+                to_port: 53
+                cidr_ip: 10.1.1.41/32
+                #DNS-TCP/UDP from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER)
+              - proto: udp
+                from_port: 389
+                to_port: 389
+                cidr_ip: 10.1.1.41/32
+                #CUST-LDAP-UDP from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 636
+                to_port: 636
+                cidr_ip: 10.1.1.41/32
+                #CUST-LDAP-SSL from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 1688
+                to_port: 1688
+                cidr_ip: 10.1.1.41/32
+                #CUST-WINDOWS-ACTIVATION from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER) 
+              - proto: tcp
+                from_port: 1024
+                to_port: 65535
+                cidr_ip: 10.1.1.41/32
+                #CUST-RPC-TCP from MFD-DEV-DOM1(CUST-AS-DOMAIN-MEMBER)
+              - proto: udp
+                from_port: 123
+                to_port: 123
+                cidr_ip: 10.1.1.64/32
+                #NTP from MFD-DEV-DOM2 (CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 445
+                to_port: 445
+                cidr_ip: 10.1.1.64/32
+                #SMB from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 88
+                to_port: 88
+                cidr_ip: 10.1.1.64/32
+                #CUST-KERBEROS-TCP/UDP from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 464
+                to_port: 464
+                cidr_ip: 10.1.1.64/32
+                #CUST-KERBEROS-PASSWORD-CHANGE-TCP/UDP from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER)
+              - proto: all
+                from_port: 53
+                to_port: 53
+                cidr_ip: 10.1.1.64/32
+                #DNS-TCP/UDP from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER)
+              - proto: udp
+                from_port: 389
+                to_port: 389
+                cidr_ip: 10.1.1.64/32
+                #CUST-LDAP-UDP from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 636
+                to_port: 636
+                cidr_ip: 10.1.1.64/32
+                #CUST-LDAP-SSL from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER)
+              - proto: tcp
+                from_port: 1688
+                to_port: 1688
+                cidr_ip: 10.1.1.64/32
+                #CUST-WINDOWS-ACTIVATION from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER) 
+              - proto: tcp
+                from_port: 1024
+                to_port: 65535
+                cidr_ip: 10.1.1.64/32
+                #CUST-RPC-TCP from MFD-DEV-DOM2(CUST-AS-DOMAIN-MEMBER)                                  
       register: basic_firewall
+
