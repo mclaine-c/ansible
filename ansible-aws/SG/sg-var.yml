@@ -4,8 +4,8 @@
   tasks:
     - name: Create security group
       ec2_group:
-          name: "{{ project_name }}_security_group"
-          description: "{{ project_name }} security group"
+          name: "{{ project_name }}"
+          description: "{{ project_name }}"
           region: "{{ aws_region }}"
           rules:
               - proto: tcp
