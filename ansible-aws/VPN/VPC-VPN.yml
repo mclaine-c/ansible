@@ -10,6 +10,12 @@
         region: us-east-1
         vpn_gateway_id: vgw-0679a39968d9f2f41
         customer_gateway_id: cgw-06fdae726ddecacfb
+        tunnel_options:
+          -
+            TunnelInsideCidr: '169.254.100.1/30'
+          -
+            TunnelInsideCidr: '169.254.100.3/30'
+
       register: customer_gateway_configuration
 
     - debug: var=customer_gateway_configuration
