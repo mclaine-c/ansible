@@ -10,4 +10,5 @@
         region: us-east-1
         vpn_gateway_id: vgw-0679a39968d9f2f41
         customer_gateway_id: cgw-06fdae726ddecacfb
-
+        register: customer_gateway_configuration
+    - debug: var=customer_gateway_configuration
