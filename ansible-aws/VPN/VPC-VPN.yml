@@ -11,6 +11,6 @@
         vpn_gateway_id: vgw-0679a39968d9f2f41
         customer_gateway_id: cgw-06fdae726ddecacfb
 
-      register: tunnel_outside_address
+      register: outside_ip_address
 
-    - debug: var=tunnel_outside_address
+    - debug: var=outside_ip_address
