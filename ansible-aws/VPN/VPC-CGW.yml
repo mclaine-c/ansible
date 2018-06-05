@@ -29,7 +29,7 @@
       ec2_vpc_vgw_facts:
         vpc_id: "{{ vpc_id }}"
         region: us-east-1
-      register: vpn_gateway_ids   
+      register: virtual_gateways   
 
     - name: Create VPN
       ec2_vpc_vpn:
