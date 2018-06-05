@@ -25,5 +25,14 @@
         type: ipsec.1
       register: created_vgw
       
-    - debug: 
-        var: created_vgw      
+    - debug: created_vgw
+        var: id      
+
+  tasks:
+    - name: Create VPN
+      ec2_vpc_vpn:
+        state: present
+        region: us-east-1
+        vpn_gateway_id: "{{ id }}"
+        customer_gateway_id: "{{ customer_gateway_id }}"
+
