@@ -11,4 +11,6 @@
         name: SYRUS-MDF-FW1
         region: us-east-1
       register: customer_gateway_id
-    - debug: msg="{{ customer_gateway_id.stdout }}"
+
+    - debug: 
+        var: customer_gateway_id
