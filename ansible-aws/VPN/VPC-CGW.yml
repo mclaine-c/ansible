@@ -10,5 +10,5 @@
         ip_address: 73.167.85.18
         name: SYRUS-MDF-FW1
         region: us-east-1
-      register: created_cgw
+      register: customer_gateway_id
  
