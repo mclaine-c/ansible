@@ -1,0 +1,22 @@
+---
+- name: Configure VPN firewall policies
+  hosts: fw1
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+  vars:
+    build_dir: "/tmp/"
+    vpn_name_info: [ {'vpn_name':'FWH-DO-SS1','unit_name':'23' } ]
+
+
+  tasks:
+    - name: Build firewall policies config template
+      template: src=templates/vpn_config.set.j2 dest={{build_dir}}/vpn_config.set
+      with_items: vpn_name_info
+
+    - name: Apply firewall policies
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}vpn_config.set overwrite=no timeout=300 logfile=logs/{{ inventory_hostname }}.log
+
+
+
