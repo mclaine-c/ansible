@@ -7,7 +7,7 @@
     - name: Create new customer gateway
       ec2_vpc_vpn:
         state: present
-        region_id: "{{ aws_region }}"
+        region: "{{ aws_region }}"
         vpn_gateway_id: "{{ vgw_id }}"
         customer_gateway_id: "{{ cgw_id }}"
 
