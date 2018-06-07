@@ -13,7 +13,7 @@
       register: customer_gateway_id
 
     - debug: 
-        var: customer_gateway_id
+        msg="{{customer_gateway_id}}"
         
 #    - name: Create new VGW attached to VPC
 #      ec2_vpc_vgw:
