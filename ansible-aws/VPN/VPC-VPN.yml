@@ -7,9 +7,9 @@
     - name: Create new customer gateway
       ec2_vpc_vpn:
         state: present
-        region: us-east-1
-        vpn_gateway_id: vgw-0679a39968d9f2f41
-        customer_gateway_id: cgw-06fdae726ddecacfb
+        region: "{{ region_id }}"
+        vpn_gateway_id: "{{ vgw_id }}"
+        customer_gateway_id: "{{ cgw_id }}"
 
       register: outside_ip_address
 
