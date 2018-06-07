@@ -15,26 +15,26 @@
     - debug: 
         var: customer_gateway_id
         
-    - name: Create new VGW attached to VPC
-      ec2_vpc_vgw:
-        state: present
-        region: us-east-1
-        #profile: personal
-        vpc_id: "{{ vpc_id }}"
-        name: personal-testing
-        type: ipsec.1
-      register: created_vgw
-      
-    - name: VGW Facts
-      ec2_vpc_vgw_facts:
-        vpc_id: "{{ vpc_id }}"
-        region: us-east-1
-      register: virtual_gateways   
-
-    - name: Create VPN
-      ec2_vpc_vpn:
-        state: present
-        region: us-east-1
-        vpn_gateway_id: "{{ id }}"
-        customer_gateway_id: "{{ customer_gateway_id }}"
+#    - name: Create new VGW attached to VPC
+#      ec2_vpc_vgw:
+#        state: present
+#        region: us-east-1
+#        #profile: personal
+#        vpc_id: "{{ vpc_id }}"
+#        name: personal-testing
+#        type: ipsec.1
+#      register: created_vgw
+#      
+#    - name: VGW Facts
+#      ec2_vpc_vgw_facts:
+#        vpc_id: "{{ vpc_id }}"
+#        region: us-east-1
+#      register: virtual_gateways   
+#
+#    - name: Create VPN
+#      ec2_vpc_vpn:
+#        state: present
+#        region: us-east-1
+#        vpn_gateway_id: "{{ id }}"
+#        customer_gateway_id: "{{ customer_gateway_id }}"
 
