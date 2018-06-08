@@ -1,6 +1,6 @@
 ---
 - name: Configure VPN firewall policies
-  hosts: fw1
+  hosts: syrus-mdf-fw1
   connection: local
   gather_facts: no
   roles:
