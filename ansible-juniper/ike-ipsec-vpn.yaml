@@ -12,7 +12,7 @@
 
   tasks:
     - name: Build firewall policies config template
-      template: src=templates/vpn_config.set.j2 dest={{build_dir}}/vpn_config.set
+      template: src=template/vpn_config.set.j2 dest={{build_dir}}/vpn_config.set
       with_items: vpn_name_info
 
     - name: Apply firewall policies
