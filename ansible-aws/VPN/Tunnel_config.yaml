@@ -1,0 +1,17 @@
+---
+- name: My System | Provision all required infrastructure
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: set up VPN with tunnel options utilizing 'TunnelInsideCidr' only
+      ec2_vpc_vpn:
+        state: present
+        filters:
+          vpn: "{{ vpn_id }}"
+        static_only: true
+        tunnel_options:
+          -
+            TunnelInsideCidr: '169.254.100.1/30'
+          -
+            TunnelInsideCidr: '169.254.100.5/30'
