@@ -10,6 +10,12 @@
         region: "{{ aws_region }}"
         vpn_gateway_id: "{{ vgw_id }}"
         customer_gateway_id: "{{ cgw_id }}"
+        tunnel_options:
+          -
+            TunnelInsideCidr: '169.254.100.1/30'
+          -
+            TunnelInsideCidr: '169.254.100.5/30'
+        
 
       register: outside_ip_address
 
