@@ -16,7 +16,4 @@
       with_items: vpn_name_info
 
     - name: Apply firewall policies
-      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}vpn_config.set overwrite=no timeout=300 logfile=logs/{{ inventory_hostname }}.log
-
-
-
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}vpn_config.set overwrite=no timeout=300
