@@ -7,7 +7,7 @@
     - Juniper.junos
   vars:
     build_dir: "/tmp/"
-    vpn_name_info: [ "{{ vpn_name }}","{{ unit_name }}" ]
+    vpn_name_info: "{{ vpn_name }}"
 
 
   tasks:
