@@ -1,6 +1,6 @@
 {% for item in vpn_name_info %}
 set security ipsec proposal IPSEC-PROPOSAL-{{ item.vpn_name }} protocol esp authentication-algorithm hmac-sha1-96 encryption-algorithm aes-256-cbc lifetime-seconds 3600
-set security ipsec policy IPSEC-POLICY-{{ item.vpn_name }} proposals IPSEC-PROPOSAL-{{ item.vpn_name }} perfect-forward-secrecy keys group5
+set security ipsec policy IPSEC-POLICY-{{ item.vpn_name }} proposals IPSEC-PROPOSAL-{{ item.vpn_name }} perfect-forward-secrecy keys group2
 set security ike proposal IKE-PROPOSAL-{{ item.vpn_name }} authentication-method pre-shared-keys dh-group group2 authentication-algorithm sha-256 encryption-algorithm aes-256-cbc lifetime-seconds 28800
 set security ike policy IKE-POLICY-{{ item.vpn_name }} mode main proposals IKE-PROPOSAL-{{ item.vpn_name }} pre-shared-key ascii-text {{ item.ascii_psk }}
 set security ipsec vpn IPSEC-VPN-{{ item.vpn_name }} bind-interface st0.{{item.unit_name}} df-bit clear vpn-monitor source-interface st0.{{item.unit_name}} destination-ip {{item.remote_cidr}}
