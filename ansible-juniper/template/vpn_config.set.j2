@@ -1,13 +1,13 @@
 {% for item in vpn_name_info %}
-set security ipsec proposal IPSEC-PROPOSAL-{{ item.vpn_name }} protocol esp authentication-algorithm hmac-sha1-96 encryption-algorithm aes-128-cbc lifetime-seconds 3600
+set security ipsec proposal IPSEC-PROPOSAL-{{ item.vpn_name }} protocol esp authentication-algorithm hmac-sha1-96 encryption-algorithm aes-256-cbc lifetime-seconds 3600
 set security ipsec policy IPSEC-POLICY-{{ item.vpn_name }} proposals IPSEC-PROPOSAL-{{ item.vpn_name }} perfect-forward-secrecy keys group2
-set security ike proposal IKE-PROPOSAL-{{ item.vpn_name }} authentication-method pre-shared-keys dh-group group2 authentication-algorithm sha1 encryption-algorithm aes-128-cbc lifetime-seconds 28800
-set security ike policy IKE-POLICY-{{ item.vpn_name }} mode main proposals IKE-PROPOSAL-{{ item.vpn_name }} pre-shared-key ascii-text 111
-set security ipsec vpn IPSEC-VPN-{{ item.vpn_name }} bind-interface st0.23 df-bit clear vpn-monitor source-interface st0.23 destination-ip 1.1.1.1
+set security ike proposal IKE-PROPOSAL-{{ item.vpn_name }} authentication-method pre-shared-keys dh-group group2 authentication-algorithm sha-256 encryption-algorithm aes-256-cbc lifetime-seconds 28800
+set security ike policy IKE-POLICY-{{ item.vpn_name }} mode main proposals IKE-PROPOSAL-{{ item.vpn_name }} pre-shared-key ascii-text {{ item.ascii_psk }}
+set security ipsec vpn IPSEC-VPN-{{ item.vpn_name }} bind-interface st0.{{item.unit_name}} df-bit clear vpn-monitor source-interface st0.{{item.unit_name}} destination-ip {{item.remote_cidr}}
 set security ipsec vpn IPSEC-VPN-{{ item.vpn_name }} ike gateway IKE-GATE-{{ item.vpn_name }} ipsec-policy IPSEC-POLICY-{{ item.vpn_name }}
 set security ipsec vpn IPSEC-VPN-{{ item.vpn_name }} establish-tunnels immediately
-set security ike gateway IKE-GATE-{{ item.vpn_name }} ike-policy IKE-POLICY-{{ item.vpn_name }} address 1.1.1.1 dead-peer-detection
+set security ike gateway IKE-GATE-{{ item.vpn_name }} ike-policy IKE-POLICY-{{ item.vpn_name }} address {{ item.ip_add }} dead-peer-detection
 set security ike gateway IKE-GATE-{{ item.vpn_name }} external-interface ge-0/0/0.0
-set interfaces st0 unit {{item.unit_name}} family inet
+set interfaces st0 unit {{item.unit_name}} family inet address {{item.tunnel_add}}
 set security zones security-zone {{item.vpn_name}} interfaces st0.{{item.unit_name}}
 {% endfor %}
