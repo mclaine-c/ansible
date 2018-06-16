@@ -1,5 +1,5 @@
 - name: Add some security rules to the firewall
-  hosts: palo
+  hosts: Palo
   connection: local
   gather_facts: False
 
