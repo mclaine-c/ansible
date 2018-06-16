@@ -1,5 +1,5 @@
 - name: Add some security rules to the firewall
-  hosts: 192.168.1.253
+  hosts: palo-fw1
   connection: local
   gather_facts: False
 
