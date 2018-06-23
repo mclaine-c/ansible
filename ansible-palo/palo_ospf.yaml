@@ -1,0 +1,22 @@
+- name: Configure VPN firewall policies
+  hosts: palo-fw1
+  connection: local
+  gather_facts: no
+  roles:
+    - PaloAltoNetworks.paloaltonetworks
+  vars:
+    build_dir: "/tmp/"
+    vpn_name_info: [ {'area_value':'0.0.12.0' } ]
+    
+  tasks:
+    - name: Build OSPF config template
+      template: src=templates/palo_ospf.set.j2 dest={{build_dir}}/palo_ospf.set
+      with_items: palo_ospf_info
+
+    - name: Apply OSPF config
+      panos_loadcfg:
+        ip_address: '192.168.1.253'
+        username: 'admin'
+        password: '5yru5H(W'
+        file: {{ build_dir }}palo_ospf.set
+        #panos_loadcfg: host={{ inventory_hostname }} file={{ build_dir }}palo_ospf.set overwrite=no timeout=300 logfile=logs/{{ inventory_hostname }}.log
