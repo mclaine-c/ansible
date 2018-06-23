@@ -6,7 +6,7 @@
     - PaloAltoNetworks.paloaltonetworks
   vars:
     build_dir: "/tmp/"
-    palo_ospf_info: [ {'area_value':'0.0.12.0' } ]
+    palo_ospf_info: [ {'area_value':'"0.0.12.0"' } ]
     
   tasks:
     - name: Build OSPF config template
