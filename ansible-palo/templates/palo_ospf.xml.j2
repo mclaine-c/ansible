@@ -1,0 +1,38 @@
+{% for item in palo_ospf_info %}
+set network virtual-router VR_MASTER protocol ospf area {{ item.area_value }} type normal 
+      <virtual-router>
+        <entry name="VR_MASTER">
+            <ospf>
+              <area>
+                <entry name={{ item.area_value }}>
+                  <type>
+                    <normal/>
+                  </type>
+                  <interface>
+                    <entry name="ethernet1/2.244">
+                      <enable>yes</enable>
+                      <passive>no</passive>
+                      <gr-delay>10</gr-delay>
+                      <metric>10</metric>
+                      <priority>1</priority>
+                      <hello-interval>10</hello-interval>
+                      <dead-counts>4</dead-counts>
+                      <retransmit-interval>5</retransmit-interval>
+                      <transit-delay>1</transit-delay>
+                      <link-type>
+                        <broadcast/>
+                      </link-type>
+                    </entry>
+                  </interface>
+                </entry>
+              </area>
+              <enable>yes</enable>
+              <router-id>10.255.255.1</router-id>
+              <reject-default-route>no</reject-default-route>
+            </ospf>
+          <interface>
+            <member>ethernet1/2.244</member>
+          </interface>
+        </entry>
+      </virtual-router>
+{% endfor %}

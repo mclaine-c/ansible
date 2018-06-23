@@ -10,7 +10,7 @@
     
   tasks:
     - name: Build OSPF config template
-      template: src=templates/palo_ospf.set.j2 dest={{build_dir}}/palo_ospf.set
+      template: src=templates/palo_ospf.xml.j2 dest={{build_dir}}/palo_ospf.xml
       with_items: palo_ospf_info
 
     - name: Apply OSPF config
@@ -18,5 +18,5 @@
         ip_address: '192.168.1.253'
         username: 'admin'
         password: '5yru5H(W'
-        file: '/tmp/palo_ospf.set'
+        file: '/tmp/palo_ospf.xml'
         #panos_loadcfg: host={{ inventory_hostname }} file={{ build_dir }}palo_ospf.set overwrite=no timeout=300 logfile=logs/{{ inventory_hostname }}.log
