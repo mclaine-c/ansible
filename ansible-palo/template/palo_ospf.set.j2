@@ -1,4 +1,4 @@
-{% for item in vpn_name_info %}
+{% for item in palo_ospf_info %}
 set network virtual-router VR_MASTER protocol ospf area {{ item.area_value }} type normal 
 set network virtual-router VR_MASTER protocol ospf area {{ item.area_value }} interface ethernet1/2.248 enable yes
 set network virtual-router VR_MASTER protocol ospf area {{ item.area_value }} interface ethernet1/2.248 passive no
