@@ -15,8 +15,8 @@ set system login class READ-ONLY permissions view
 set system login class READ-ONLY permissions view-configuration
 set system login class solarwinds permissions view
 set system login class solarwinds permissions view-configuration
-set system login class solarwinds allow-commands "(show configuration) | (show system) | (show interfaces) | (show snmp) | (show routing-options) | (show protocols) | (show security) | (show services) | (show applications) | (show vlans)"
-set system login class solarwinds deny-commands " (commit) | (request) | (edit) | (set) "
+set system login class solarwinds allow-commands 
+set system login class solarwinds deny-commands
 set system login user read-only full-name "ACS read-only template"
 set system login user read-only uid 1050
 set system login user read-only class READ-ONLY
