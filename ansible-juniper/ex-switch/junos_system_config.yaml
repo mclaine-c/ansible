@@ -7,7 +7,8 @@
     - Juniper.junos
   vars:
     build_dir: "/tmp/"
-    system_build_info: "{{ 'hostname':'syrus-idf-asw1' }}"
+    system_build_info:
+      - hostname: 'syrus-idf-asw1'
 
 
   tasks:
