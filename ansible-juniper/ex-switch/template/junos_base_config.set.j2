@@ -67,8 +67,8 @@ set interfaces xe-1/1/3 unit 9{{ item.guest_vlan }} family inet address 10.7.99.
 set interfaces xe-1/1/3 unit 9{{ item.airtame_vlan }} description VR_AIRTAME_P2P-LINK
 set interfaces xe-1/1/3 unit 9{{ item.airtame_vlan }} vlan-id 9{{ item.airtame_vlan }}
 set interfaces xe-1/1/3 unit 9{{ item.airtame_vlan }} family inet address 10.7.99.34/30
-set interfaces irb unit {{ item.access_vlan }} description Access
-set interfaces irb unit {{ item.access_vlan }} family inet address {{ item.trust_gw_ip }}
+set interfaces irb unit {{ item.trust_vlan }} description Access
+set interfaces irb unit {{ item.trust_vlan }} family inet address {{ item.trust_gw_ip }}
 set interfaces irb unit {{ item.voice_vlan }} description Voice
 set interfaces irb unit {{ item.voice_vlan }} family inet address {{ item.voice_gw_ip }}
 set interfaces irb unit {{ item.secure_vlan }} description SubwaySecure
