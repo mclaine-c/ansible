@@ -8,7 +8,7 @@
   vars:
     build_dir: "/tmp/"
     junos_base_config:
-      #- hostname: 'SYRUS-IDF-ASW1'
+      - hostname: 'SYRUS-IDF-ASW1'
         #snmp: 'woops'
         #timezone: ''
         #acs_secret: '1234'
