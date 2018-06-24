@@ -1,0 +1,19 @@
+---
+- name: Configure System Config
+  hosts: syrus-idf-sw1
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+  vars:
+    build_dir: "/tmp/"
+    system_build_info: "{{ 'hostname':'syrus-idf-asw1' }}"
+
+
+  tasks:
+    - name: Build system config template
+      template: src=template/junos_system_config.set.j2 dest={{build_dir}}/junos_system_config.set
+      with_items: system_build_info
+
+    - name: Apply system config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}junos_system_config.set overwrite=no timeout=300
