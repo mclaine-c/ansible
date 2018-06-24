@@ -83,14 +83,6 @@ set interfaces irb unit {{ printer_vlan }} description Printers
 set interfaces irb unit {{ printer_vlan }} family inet address 10.7.36.129/26
 set interfaces lo0 unit 0 family inet filter input RE_FILTER
 set interfaces lo0 unit 0 family inet address 10.7.4.254/24
-set snmp location {{ snmp_location }}
-set snmp contact netadmin@lab.com
-set snmp v3 usm local-engine user {{ snmp_user }} authentication-sha authentication-key {{ snmp_auth_key }}
-set snmp v3 usm local-engine user {{ snmp_user }} privacy-aes128 privacy-key {{ snmp_priv_key }}
-set snmp v3 vacm security-to-group security-model usm security-name {{ snmp_user }} group {{ snmp-user }}-GROUP
-set snmp v3 vacm access group {{ snmp_user }}-GROUP default-context-prefix security-model usm security-level privacy read-view RO-VIEW
-set snmp engine-id use-default-ip-address
-set snmp view RO-VIEW oid .1 include
 set forwarding-options storm-control-profiles P-STORM-CONTROL all bandwidth-percentage 75
 set forwarding-options storm-control-profiles P-STORM-CONTROL all no-registered-multicast
 set forwarding-options storm-control-profiles P-STORM-CONTROL action-shutdown
