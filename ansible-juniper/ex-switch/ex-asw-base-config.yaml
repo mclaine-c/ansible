@@ -9,7 +9,7 @@
     build_dir: "/tmp/"
     junos_base_config:
       - hostname: 'SYRUS-IDF-ASW1'
-        timezone:
+        timezone: ''
         acs_secret: '1234'
         trust_gw_ip: '10.1.1.1/24'
         snmp_location: 'Derby, CT'

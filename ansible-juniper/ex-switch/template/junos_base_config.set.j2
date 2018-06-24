@@ -8,7 +8,7 @@ set system root-authentication plain-text-password {{ root_pass }}
 set system name-server 10.1.0.6
 set system name-server 10.1.0.8
 set system name-server 10.50.1.26
-set system tacplus-server 10.50.1.22 secret (( acs_secret ))
+set system tacplus-server 10.50.1.22 secret {{ acs_secret }}
 set system tacplus-server 10.50.1.22 source-address {{ trust_gw_ip }}
 set system login class READ-ONLY idle-timeout 10
 set system login class READ-ONLY permissions view
@@ -45,7 +45,7 @@ set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching inte
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching vlan members trust
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching recovery-timeout 120
-set interfaces xe-0/1/3 description "To (( uplink0_info }}"
+set interfaces xe-0/1/3 description "To {{ uplink0_info }}"
 set interfaces xe-0/1/3 vlan-tagging
 set interfaces xe-0/1/3 unit 9{{ trust_vlan }} vlan-id 9{{ trust_vlan }}
 set interfaces xe-0/1/3 unit 9{{ trust_vlan }} family inet filter input F-VOIP-EF-INET
@@ -67,12 +67,12 @@ set interfaces xe-1/1/3 unit 9{{ guest_vlan }} family inet address 10.7.99.10/30
 set interfaces xe-1/1/3 unit 9{{ airtame_vlan }} description VR_AIRTAME_P2P-LINK
 set interfaces xe-1/1/3 unit 9{{ airtame_vlan }} vlan-id 9{{ airtame_vlan }}
 set interfaces xe-1/1/3 unit 9{{ airtame_vlan }} family inet address 10.7.99.34/30
-set interfaces irb unit (( access_vlan )) description Access
-set interfaces irb unit (( access_vlan )) family inet address {{ trust_gw_ip }}
+set interfaces irb unit {{ access_vlan }} description Access
+set interfaces irb unit {{ access_vlan }} family inet address {{ trust_gw_ip }}
 set interfaces irb unit {{ voice_vlan }} description Voice
 set interfaces irb unit {{ voice_vlan }} family inet address {{ voice_gw_ip }}
 set interfaces irb unit {{ secure_vlan }} description SubwaySecure
-set interfaces irb unit (( secure_vlan )) family inet address {{ secure_gw_ip }}
+set interfaces irb unit {{ secure_vlan }} family inet address {{ secure_gw_ip }}
 set interfaces irb unit {{ guest_vlan }} description VR_GUESTWLAN
 set interfaces irb unit {{ guest_vlan }} family inet address 10.7.35.1/24
 set interfaces irb unit 47 description MGMT
@@ -84,7 +84,7 @@ set interfaces irb unit {{ printer_vlan }} family inet address 10.7.36.129/26
 set interfaces lo0 unit 0 family inet filter input RE_FILTER
 set interfaces lo0 unit 0 family inet address 10.7.4.254/24
 set snmp location {{ snmp_location }}
-set snmp contact (( snmp_contact ))
+set snmp contact netadmin@lab.com
 set snmp v3 usm local-engine user {{ snmp_user }} authentication-sha authentication-key {{ snmp_auth_key }}
 set snmp v3 usm local-engine user {{ snmp_user }} privacy-aes128 privacy-key {{ snmp_priv_key }}
 set snmp v3 vacm security-to-group security-model usm security-name {{ snmp_user }} group {{ snmp-user }}-GROUP
@@ -113,10 +113,10 @@ set protocols ospf area {{ ospf_area }} interface irb.{{ trust_vlan }} passive
 set protocols ospf area {{ ospf_area }} interface irb.{{ trust_vlan }} hello-interval 3
 set protocols ospf area {{ ospf_area }} interface irb.{{ trust_vlan }} dead-interval 12
 set protocols ospf area {{ ospf_area }} interface irb.{{ trust_vlan }} authentication md5 1 key {{ ospf_md5 }}
-set protocols ospf area {{ ospf_area }} interface irb.(( secure_vlan )) passive
-set protocols ospf area {{ ospf_area }} interface irb.(( secure_vlan )) hello-interval 3
-set protocols ospf area {{ ospf_area }} interface irb.(( secure_vlan )) dead-interval 12
-set protocols ospf area {{ ospf_area }} interface irb.(( secure_vlan )) authentication md5 1 key {{ ospf_md5 }}
+set protocols ospf area {{ ospf_area }} interface irb.{{ secure_vlan }} passive
+set protocols ospf area {{ ospf_area }} interface irb.{{ secure_vlan }} hello-interval 3
+set protocols ospf area {{ ospf_area }} interface irb.{{ secure_vlan }} dead-interval 12
+set protocols ospf area {{ ospf_area }} interface irb.{{ secure_vlan }} authentication md5 1 key {{ ospf_md5 }}
 set protocols ospf area {{ ospf_area }} interface irb.{{ voice_vlan }} passive
 set protocols ospf area {{ ospf_area }} interface irb.{{ voice_vlan }} hello-interval 3
 set protocols ospf area {{ ospf_area }} interface irb.{{ voice_vlan }} dead-interval 12
