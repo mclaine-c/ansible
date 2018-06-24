@@ -7,14 +7,11 @@
     - Juniper.junos
   vars:
     build_dir: "/tmp/"
-    junos_base_config: [ {'hostname':'SYRUS-IDF-ASW1'} ] 
-    fw_policy_info: [ {'hostname':'Allow_Policy'} ]
-    #'snmp':'woops', 'timezone':'', 'acs_secret':'1234', 'trust_gw_ip':'10.1.1.1/24', 'mst_name':'subwaydai.mst', 'mst_rev':'1', 'mst_priority':'0', 'vc_member0_sn':'', 'vc_member1_sn':'', 'ospf_area':'0.0.13.0', 'root_pass':'testicles', 'uplink1_info':'', 'access_vlan':'72', 'access_ip':'10', 'interface':'ip', 'voice_vlan':'73', 'secure_vlan':'74', 'guest_vlan':'75', 'airtame_vlan':'76', 'mgmt_vlan':'', 'printer_vlan':'77', 'ospf_md5':'test', 'voice_cidr':'' } ]
-
+    
   tasks:
     - name: Build base access switch config template
       template: src=template/junos_base_config.set.j2 dest={{build_dir}}/junos_base_config.set
-      with_items: fw_policy_info
+      with_items: junos_base_config
 
     - name: Apply built config
       junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}junos_base_config.set overwrite=no timeout=300
