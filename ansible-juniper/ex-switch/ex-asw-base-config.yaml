@@ -1,19 +1,46 @@
 ---
-- name: Configure VPN firewall policies
-  hosts: syrus-mdf-fw1
+- name: Configure Juniper Access Switch
+  hosts: syrus-idf-sw1
   connection: local
   gather_facts: no
   roles:
     - Juniper.junos
   vars:
     build_dir: "/tmp/"
-    #vpn_name_info: "{{ vpn_name }}"
-
+    junos_base_config:
+      - hostname: 'SYRUS-IDF-ASW1'
+        timezone:
+        acs_secret: '1234'
+        trust_gw_ip: '10.1.1.1/24'
+        snmp_location: 'Derby, CT'
+        snmp_contact: 'neteng@subway.com'
+        snmp_user: 'SW-DRBY-RO'
+        snmp_auth_key: 'string'
+        snmp_priv_key: 'string'
+        mst_name: 'subwaydai.mst'
+        mst_rev: '1'
+        mst_priority: '0'
+        vc_member0_sn: ''
+        vc_member1_sn: ''
+        ospf_area: '0.0.13.0'
+        root_pass: 'testicles'
+        uplink1_info: ''
+        access_vlan: '72'
+        #access_ip: '10' 
+        #interface ip
+        voice_vlan: '73'
+        secure_vlan: '74'
+        guest_vlan: '75'
+        airtame_vlan: '76'
+        mgmt_vlan: ''
+        printer_vlan: '77'
+        ospf_md5: 'test'
+        voice_cidr: ''
 
   tasks:
-    - name: Build firewall policies config template
-      template: src=template/vpn_config.set.j2 dest={{build_dir}}/vpn_config.set
-      with_items: vpn_name_info
+    - name: Build base access switch config template
+      template: src=template/junos_base_config.set.j2 dest={{build_dir}}/junos_base_config.set
+      with_items: junos_base_config
 
-    - name: Apply firewall policies
-      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}vpn_config.set overwrite=no timeout=300
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}junos_base_config.set overwrite=no timeout=300
