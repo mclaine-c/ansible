@@ -13,16 +13,12 @@ set system tacplus-server 10.50.1.22 source-address {{ item.trust_gw_ip }}
 set system login class READ-ONLY idle-timeout 10
 set system login class READ-ONLY permissions view
 set system login class READ-ONLY permissions view-configuration
-set system login class solarwinds permissions view
-set system login class solarwinds permissions view-configuration
 set system login user read-only full-name "ACS read-only template"
 set system login user read-only uid 1050
 set system login user read-only class READ-ONLY
 set system login user remote full-name "ACS Template"
 set system login user remote uid 2050
 set system login user remote class super-user
-set system login user solarwinds uid 2002
-set system login user solarwinds class solarwinds
 set system services ssh root-login allow
 set system services ssh protocol-version v2
 set system services ssh max-sessions-per-connection 32
