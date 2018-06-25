@@ -195,13 +195,13 @@ set routing-instances VR_GUESTWLAN protocols ospf area {{ item.ospf_area }} inte
 set routing-instances VR_GUESTWLAN protocols ospf area {{ item.ospf_area }} interface xe-1/1/3.9{{ item.guest_vlan }} authentication md5 1 key {{ item.ospf_md5 }}
 set switch-options voip interface TRUST-RANGE vlan voice
 set switch-options voip interface TRUST-RANGE forwarding-class expedited-forwarding
-set virtual-chassis preprovisioned
-set virtual-chassis no-split-detection
-set virtual-chassis member 0 role routing-engine
-set virtual-chassis member 0 serial-number {{ item.vc_member0_sn }}
-set virtual-chassis member 1 role routing-engine
-set virtual-chassis member 1 serial-number {{ item.vc_member1_sn }}
-set virtual-chassis vcp-no-hold-time
+delete virtual-chassis preprovisioned
+delete virtual-chassis no-split-detection
+delete virtual-chassis member 0 role routing-engine
+delete virtual-chassis member 0 serial-number {{ item.vc_member0_sn }}
+delete virtual-chassis member 1 role routing-engine
+delete virtual-chassis member 1 serial-number {{ item.vc_member1_sn }}
+delete virtual-chassis vcp-no-hold-time
 set vlans mgmt vlan-id 47
 set vlans mgmt l3-interface irb.47
 set vlans printers vlan-id {{ item.printer_vlan }}
