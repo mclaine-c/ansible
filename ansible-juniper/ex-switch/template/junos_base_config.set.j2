@@ -84,6 +84,7 @@ set interfaces lo0 unit 0 family inet address 10.7.4.254/24
 set snmp location {{ item.snmp_location }}
 set snmp contact {{ item.snmp_contact }}
 set snmp v3 usm local-engine user {{ item.snmp_user }} authentication-sha authentication-key {{ item.snmp_auth_key }}
+set snmp v3 usm local-engine user {{ item.snmp_user }} privacy-aes128 privacy-key {{ item.snmp_priv_key }}
 set snmp engine-id use-default-ip-address
 set snmp view RO-VIEW oid .1 include
 set forwarding-options storm-control-profiles P-STORM-CONTROL all bandwidth-percentage 75
