@@ -15,8 +15,8 @@ set system login class READ-ONLY permissions view
 set system login class READ-ONLY permissions view-configuration
 set system login class solarwinds permissions view
 set system login class solarwinds permissions view-configuration
-set system login class solarwinds allow-commands 
-set system login class solarwinds deny-commands
+set system login class solarwinds allow-commands "(show configuration) | (show system) | (show interfaces) | (show snmp) | (show routing-options) | (show protocols) | (show security) | (show services) | (show applications) | (show vlans)"
+set system login class solarwinds deny-commands " (commit) | (request) | (edit) | (set) "
 set system login user read-only full-name "ACS read-only template"
 set system login user read-only uid 1050
 set system login user read-only class READ-ONLY
@@ -83,6 +83,14 @@ set interfaces irb unit {{ item.printer_vlan }} description Printers
 set interfaces irb unit {{ item.printer_vlan }} family inet address 10.7.36.129/26
 set interfaces lo0 unit 0 family inet filter input RE_FILTER
 set interfaces lo0 unit 0 family inet address 10.7.4.254/24
+set snmp location {{ item.snmp_location }}
+set snmp contact (( item.snmp_contact ))
+set snmp v3 usm local-engine user {{ item.snmp_user }} authentication-sha authentication-key {{ item.snmp_auth_key }}
+set snmp v3 usm local-engine user {{ item.snmp_user }} privacy-aes128 privacy-key {{ item.snmp_priv_key }}
+set snmp v3 vacm security-to-group security-model usm security-name {{ item.snmp_user }} group {{ item.snmp-user }}-GROUP
+set snmp v3 vacm access group {{ item.snmp_user }}-GROUP default-context-prefix security-model usm security-level privacy read-view RO-VIEW
+set snmp engine-id use-default-ip-address
+set snmp view RO-VIEW oid .1 include
 set forwarding-options storm-control-profiles P-STORM-CONTROL all bandwidth-percentage 75
 set forwarding-options storm-control-profiles P-STORM-CONTROL all no-registered-multicast
 set forwarding-options storm-control-profiles P-STORM-CONTROL action-shutdown
