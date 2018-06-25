@@ -81,6 +81,8 @@ set interfaces irb unit {{ item.printer_vlan }} description Printers
 set interfaces irb unit {{ item.printer_vlan }} family inet address 10.7.36.129/26
 set interfaces lo0 unit 0 family inet filter input RE_FILTER
 set interfaces lo0 unit 0 family inet address 10.7.4.254/24
+set snmp location {{ item.snmp_location }}
+set snmp contact {{ item.snmp_contact }}
 set forwarding-options storm-control-profiles P-STORM-CONTROL all bandwidth-percentage 75
 set forwarding-options storm-control-profiles P-STORM-CONTROL all no-registered-multicast
 set forwarding-options storm-control-profiles P-STORM-CONTROL action-shutdown
