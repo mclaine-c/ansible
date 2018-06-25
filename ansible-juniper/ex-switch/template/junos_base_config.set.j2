@@ -42,24 +42,24 @@ set interfaces xe-0/1/3 description "To {{ item.uplink0_info }}"
 set interfaces xe-0/1/3 vlan-tagging
 set interfaces xe-0/1/3 unit 9{{ item.trust_vlan }} vlan-id 9{{ item.trust_vlan }}
 set interfaces xe-0/1/3 unit 9{{ item.trust_vlan }} family inet filter input F-VOIP-EF-INET
-set interfaces xe-0/1/3 unit 9{{ item.trust_vlan }} family inet address 10.7.4.2/30
+set interfaces xe-0/1/3 unit 9{{ item.trust_vlan }} family inet address 10.1.4.2/30
 set interfaces xe-0/1/3 unit 9{{ item.guest_vlan }} description VR_GUESTWLAN_P2P-LINK
 set interfaces xe-0/1/3 unit 9{{ item.guest_vlan }} vlan-id 9{{ item.guest_vlan }}
-set interfaces xe-0/1/3 unit 9{{ item.guest_vlan }} family inet address 10.7.99.10/30
+set interfaces xe-0/1/3 unit 9{{ item.guest_vlan }} family inet address 10.1.99.10/30
 set interfaces xe-0/1/3 unit 9{{ item.airtame_vlan }} description VR_AIRTAME_P2P-LINK
 set interfaces xe-0/1/3 unit 9{{ item.airtame_vlan }} vlan-id 9{{ item.airtame_vlan }}
-set interfaces xe-0/1/3 unit 9{{ item.airtame_vlan }} family inet address 10.7.99.34/30
+set interfaces xe-0/1/3 unit 9{{ item.airtame_vlan }} family inet address 10.1.99.34/30
 set interfaces xe-1/1/3 description "To {{ item.uplink1_info }}"
 set interfaces xe-1/1/3 vlan-tagging
 set interfaces xe-1/1/3 unit 9{{ item.trust_vlan }} vlan-id 9{{ item.trust_vlan }}
 set interfaces xe-1/1/3 unit 9{{ item.trust_vlan }} family inet filter input F-VOIP-EF-INET
-set interfaces xe-1/1/3 unit 9{{ item.trust_vlan }} family inet address 10.7.4.2/30
+set interfaces xe-1/1/3 unit 9{{ item.trust_vlan }} family inet address 10.1.4.2/30
 set interfaces xe-1/1/3 unit 9{{ item.guest_vlan }} description VR_GUESTWLAN_P2P-LINK
 set interfaces xe-1/1/3 unit 9{{ item.guest_vlan }} vlan-id 9{{ item.guest_vlan }}
-set interfaces xe-1/1/3 unit 9{{ item.guest_vlan }} family inet address 10.7.99.10/30
+set interfaces xe-1/1/3 unit 9{{ item.guest_vlan }} family inet address 10.1.99.10/30
 set interfaces xe-1/1/3 unit 9{{ item.airtame_vlan }} description VR_AIRTAME_P2P-LINK
 set interfaces xe-1/1/3 unit 9{{ item.airtame_vlan }} vlan-id 9{{ item.airtame_vlan }}
-set interfaces xe-1/1/3 unit 9{{ item.airtame_vlan }} family inet address 10.7.99.34/30
+set interfaces xe-1/1/3 unit 9{{ item.airtame_vlan }} family inet address 10.1.99.34/30
 set interfaces irb unit {{ item.trust_vlan }} description Access
 set interfaces irb unit {{ item.trust_vlan }} family inet address {{ item.trust_gw_ip }}
 set interfaces irb unit {{ item.voice_vlan }} description Voice
@@ -67,14 +67,13 @@ set interfaces irb unit {{ item.voice_vlan }} family inet address {{ item.voice_
 set interfaces irb unit {{ item.secure_vlan }} description SubwaySecure
 set interfaces irb unit {{ item.secure_vlan }} family inet address {{ item.secure_gw_ip }}
 set interfaces irb unit {{ item.guest_vlan }} description VR_GUESTWLAN
-set interfaces irb unit {{ item.guest_vlan }} family inet address 10.7.35.1/24
+set interfaces irb unit {{ item.guest_vlan }} family inet address {{ item.guest_gw_ip }}
 set interfaces irb unit 47 description MGMT
-set interfaces irb unit 47 family inet address 10.7.47.129/26
+set interfaces irb unit 47 family inet address {{ item.mgmt_gw_ip }}
 set interfaces irb unit {{ item.airtame_vlan }} description VR_AIRTAME
-set interfaces irb unit {{ item.airtame_vlan }} family inet address 10.7.36.1/27
+set interfaces irb unit {{ item.airtame_vlan }} family inet address {{ item.airtame_gw_ip }}
 set interfaces irb unit {{ item.printer_vlan }} description Printers
-set interfaces irb unit {{ item.printer_vlan }} family inet address 10.7.36.129/26
-set interfaces lo0 unit 0 family inet address 10.7.4.254/24
+set interfaces irb unit {{ item.printer_vlan }} family inet address {{ item.printer_gw_ip }}
 set snmp location {{ item.snmp_location }}
 set snmp contact {{ item.snmp_contact }}
 set snmp v3 usm local-engine user {{ item.snmp_user }} authentication-sha authentication-key {{ item.snmp_auth_key }}
