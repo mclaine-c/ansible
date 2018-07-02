@@ -39,14 +39,14 @@ set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching vlan
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching recovery-timeout 120
 set interfaces ge-0/0/0 description "To {{ item.uplink0_info }}"
-set interfaces ge-0/0/0 unit 0 family ethernet-switching filter input F-VOIP-EF-INET
+set interfaces ge-0/0/0 unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces ge-0/0/0 unit 0 family ethernet-switching interface-mode trunk
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_p2p
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_airtame-p2p
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_guestwlan-p2p
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_mgmt-p2p
 set interfaces ge-1/0/0 description "To {{ item.uplink1_info }}"
-set interfaces ge-1/0/0 unit 0 family ethernet-switching filter input F-VOIP-EF-INET
+set interfaces ge-1/0/0 unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces ge-1/0/0 unit 0 family ethernet-switching interface-mode trunk
 set interfaces ge-1/0/0 unit 0 family ethernet-switching vlan members trust_p2p
 set interfaces ge-1/0/0 unit 0 family ethernet-switching vlan members trust_airtame-p2p
@@ -54,6 +54,7 @@ set interfaces ge-1/0/0 unit 0 family ethernet-switching vlan members trust_gues
 set interfaces ge-1/0/0 unit 0 family ethernet-switching vlan members trust_mgmt-p2p
 set interfaces irb unit 4050 family inet address {{ item.trust_p2p_sw_ip }}
 set interfaces irb unit 4050 description trust-P2P
+set interfaces irb unit 4050 family inet filter input F-VOIP-EF-INET
 set interfaces irb unit 4053 family inet address {{ item.wlan_p2p_sw_ip }}
 set interfaces irb unit 4053 description trust-guestwlan-P2P
 set interfaces irb unit 4054 family inet address {{ item.airtame_p2p_sw_ip }}
