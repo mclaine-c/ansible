@@ -33,9 +33,9 @@ set chassis redundancy graceful-switchover
 set chassis alarm management-ethernet link-down ignore
 set interfaces interface-range TRUST-RANGE member-range ge-0/0/2 to ge-0/0/45
 set interfaces interface-range TRUST-RANGE member-range ge-1/0/2 to ge-1/0/45
-set interfaces interface-range TRUST-RANGE ether-options ethernet-switch-profile storm-control P-STORM-CONTROL
+set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching storm-control P-STORM-CONTROL
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching interface-mode access
-set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching vlan members trust
+set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching vlan members trust_access
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching recovery-timeout 120
 set interfaces ge-0/0/0 description "To {{ item.uplink0_info }}"
