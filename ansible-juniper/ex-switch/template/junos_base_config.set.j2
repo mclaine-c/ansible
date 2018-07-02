@@ -18,8 +18,6 @@ set system login user read-only class READ-ONLY
 set system login user remote full-name "ACS Template"
 set system login user remote uid 2050
 set system login user remote class super-user
-set system login user solarwinds uid 2002
-set system login user solarwinds class solarwinds
 set system services ssh root-login allow
 set system services ssh protocol-version v2
 set system services ssh max-sessions-per-connection 32
@@ -187,7 +185,7 @@ set vlans trust-mgmt-p2p vlan-id 4055
 set vlans trust-mgmt-p2p l3-interface irb.4055
 set vlans trust-printers vlan-id 56
 set vlans trust-printers l3-interface irb.56
-set vlans trust-acess vlan-id 50
+set vlans trust-access vlan-id 50
 set vlans trust-access l3-interface irb.50
 set vlans trust-p2p vlan-id 4050
 set vlans trust-p2p l3-interface irb.4050
