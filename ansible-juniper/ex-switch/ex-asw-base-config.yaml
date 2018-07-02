@@ -28,6 +28,7 @@
         ospf_area: '0.0.13.0'
         voice_cidr: '10.33.1.0/24'
         
+  tasks:      
     - name: Build base access switch config template
       template: src=template/junos_base_config.set.j2 dest={{build_dir}}/junos_base_config.set
       with_items: junos_base_config
