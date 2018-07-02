@@ -7,8 +7,31 @@
     - Juniper.junos
   vars:
     build_dir: "/tmp/"
-    
+
   tasks:
+    - name: include vars
+      include_vars:
+      junos_base_config:
+        - hostname: SYRUS-IDF-ASW1
+          timezone: 'EST'
+          acs_secret: '1234'
+          trust_gw_ip: '10.33.4.254'
+          uplink0_info: 'SYRUS-IDF-FW1-1'
+          uplink1_info: 'SYRUS-IDF-FW1-2'
+          trust_p2p_sw_ip: '10.33.4.254/30'
+          wlan_p2p_sw_ip: '10.33.4.250/30'
+          airtame_p2p_sw_ip: '10.33.4.246/30'
+          mgmt_p2p_sw_ip: '10.33.4.242/30'
+          trust_gw_ip: '10.33.0.1/24'
+          voice_gw_ip: '10.33.1.1/24'
+          secure_gw_ip: '10.33.2.1/24'
+          guest_gw_ip: '10.33.3.1/24'
+          mgmt_gw_ip: '10.33.4.129/27'
+          airtame_gw_ip: '10.33.4.33/27'
+          printer_gw_ip: '10.33.4.1/27'
+          ospf_area: '0.0.13.0'
+          voice_cidr: '10.33.1.0/24'
+        
     - name: Build base access switch config template
       template: src=template/junos_base_config.set.j2 dest={{build_dir}}/junos_base_config.set
       with_items: junos_base_config
