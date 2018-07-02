@@ -11,7 +11,7 @@
       - hostname: SYRUS-IDF-ASW1
         timezone: 'EST'
         acs_secret: '1234'
-        trust_gw_ip: '10.33.4.254'
+        trust_gw: '10.33.4.254'
         uplink0_info: 'SYRUS-IDF-FW1-1'
         uplink1_info: 'SYRUS-IDF-FW1-2'
         trust_p2p_sw_ip: '10.33.4.254/30'

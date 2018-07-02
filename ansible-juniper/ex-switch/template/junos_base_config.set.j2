@@ -8,7 +8,7 @@ set system name-server 10.1.0.6
 set system name-server 10.1.0.8
 set system name-server 10.50.1.26
 set system tacplus-server 10.50.1.22 secret {{ item.acs_secret }}
-set system tacplus-server 10.50.1.22 source-address {{ item.trust_gw_ip }}
+set system tacplus-server 10.50.1.22 source-address {{ item.trust_gw }}
 set system login class READ-ONLY idle-timeout 10
 set system login class READ-ONLY permissions view
 set system login class READ-ONLY permissions view-configuration
