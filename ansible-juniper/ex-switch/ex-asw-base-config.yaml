@@ -8,12 +8,10 @@
   vars:
     build_dir: "/tmp/"
     junos_base_config:
-      - hostname: SYRUS-IDF-ASW1
+      - hostname: 'SYRUS'
         timezone: 'EST'
         acs_secret: '1234'
-        trust_gw: '10.33.4.254'
-        uplink0_info: 'SYRUS-IDF-FW1-1'
-        uplink1_info: 'SYRUS-IDF-FW1-2'
+        mgmt_ip: '10.33.4.129'
         trust_p2p_sw_ip: '10.33.4.254/30'
         wlan_p2p_sw_ip: '10.33.4.250/30'
         airtame_p2p_sw_ip: '10.33.4.246/30'
@@ -28,6 +26,18 @@
         ospf_area: '0.0.13.0'
         voice_cidr: '10.33.1.0/24'
         ospf_md5: ''
+        access_cidr: "10.33.0.0/24"
+        access_dhcp_low: "10.33.0.100"
+        access_dhcp_high: "10.33.0.199"
+        access_dhcp_gw: "10.33.0.1"
+        voice_dhcp_low: "10.33.1.100"
+        voice_dhcp_high: "10.33.1.199"
+        voice_dhcp_gw: "10.33.1.1"
+        secure_dhcp_low: "10.33.2.100"
+        secure_dhcp_high: "10.33.2.199"  
+        secure_dhcp_gw: "10.33.2.1"
+        voice_cidr: "10.33.1.0/24"
+        secure_cidr: "10.33.2.0/24"
         
   tasks:      
     - name: Build base access switch config template
