@@ -27,7 +27,7 @@
         printer_gw_ip: '10.33.4.1/27'
         ospf_area: '0.0.13.0'
         voice_cidr: '10.33.1.0/24'
-        ospf_md5: 'Subway10'
+        ospf_md5: ''
         
   tasks:      
     - name: Build base access switch config template
