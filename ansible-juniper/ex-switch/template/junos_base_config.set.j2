@@ -58,14 +58,14 @@ set interfaces interface-range AP-RANGE unit 0 family ethernet-switching interfa
 set interfaces interface-range AP-RANGE unit 0 family ethernet-switching vlan members trust_securewlan
 set interfaces interface-range AP-RANGE unit 0 family ethernet-switching vlan members trust_guestwlan
 set interfaces interface-range AP-RANGE unit 0 family ethernet-switching vlan members trust_mgmt
-set interfaces ge-0/0/0 description "To {{ item.uplink0_info }}-MDF-FW1-1 Ethernet1/3"
+set interfaces ge-0/0/0 description "To {{ item.hostname }}-MDF-FW1-1 Ethernet1/3"
 set interfaces ge-0/0/0 unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces ge-0/0/0 unit 0 family ethernet-switching interface-mode trunk
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_p2p
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_airtame-p2p
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_guestwlan-p2p
 set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members trust_mgmt-p2p
-set interfaces ge-1/0/0 description "To {{ item.uplink1_info }}-MDF-FW1-2 Ethernet1/3"
+set interfaces ge-1/0/0 description "To {{ item.hostname }}-MDF-FW1-2 Ethernet1/3"
 set interfaces ge-1/0/0 unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces ge-1/0/0 unit 0 family ethernet-switching interface-mode trunk
 set interfaces ge-1/0/0 unit 0 family ethernet-switching vlan members trust_p2p
