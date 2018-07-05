@@ -142,7 +142,7 @@ set protocols sflow interfaces xe-0/0/0.0
 set protocols sflow interfaces xe-1/0/0.0
 set protocols layer2-control nonstop-bridging
 set protocols layer2-control bpdu-block disable-timeout 120
-set protocols mstp configuration-name {{ item.hostnmae }}
+set protocols mstp configuration-name {{ item.hostname }}
 set protocols mstp revision-level 1
 set protocols mstp bridge-priority 0
 set protocols mstp bpdu-block-on-edge
