@@ -11,7 +11,7 @@
       - hostname: 'SYRUS'
         timezone: 'EST'
         acs_secret: '1234'
-        mgmt_ip: '10.33.4.129'
+        mgmt_gw: '10.33.4.129'
         trust_p2p_sw_ip: '10.33.4.254/30'
         wlan_p2p_sw_ip: '10.33.4.250/30'
         airtame_p2p_sw_ip: '10.33.4.246/30'
