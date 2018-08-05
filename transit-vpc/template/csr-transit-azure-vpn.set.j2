@@ -1,0 +1,50 @@
+{% for item in csr_az_vpn_config %}
+ip vrf vpn-azure-{{ item.vnet }}-vpn
+ rd 65555:{{ item.tunnel_id }}
+ route-target export 65555:0
+ route-target import 65555:0
+exit
+crypto ikev2 keyring ikev2-key-azure-{{ item.vnet }}
+ peer {{ item.azure_gw_ip }}
+  address {{ item.azure_gw_ip }}
+  pre-shared-key {{ item.vpn_psk }}
+exit
+exit
+crypto ikev2 profile ikev2-profile-azure-{{ item.vnet }}
+ match identity remote address {{ item.azure_gw_ip }} 255.255.255.255 
+ identity local address {{ item.aws_csr_ip }}
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local ikev2-key-azure-{{ item.vnet }}
+ lifetime 28800
+ dpd 10 5 on-demand
+exit
+crypto ipsec profile ipsec-profile-azure-{{ item.vnet }}
+ set security-association lifetime kilobytes 102400000
+ set transform-set ipsec-prop-vpn-azure
+ set ikev2-profile ikev2-profile-azure-{{ item.vnet }} 
+exit
+interface Tunnel{{ item.tunnel_id }}
+ description vpn from Azure {{ item.vnet }} Vnet
+ ip vrf forwarding vpn-azure-{{ item.vnet }}-vpn
+ ip address {{ item.tunnel_ip }} 255.255.255.255
+ ip tcp adjust-mss 1350
+ tunnel source GigabitEthernet1
+ tunnel mode ipsec ipv4
+ tunnel destination {{ item.azure_gw_ip }}
+ tunnel protection ipsec profile ipsec-profile-azure-{{ item.vnet }}
+ ip virtual-reassembly
+exit
+router bgp 65555
+ bgp log-neighbor-changes
+ !
+ address-family ipv4 vrf vpn-azure-{{ item.vnet }}-vpn
+  neighbor {{ item.az_bgp_ip }} remote-as {{ item.az_asn }}
+  neighbor {{ item.az_bgp_ip }}  ebgp-multihop 255
+  neighbor {{ item.az_bgp_ip }}  update-source Tunnel{{ item.tunnel_id }}
+  neighbor {{ item.az_bgp_ip }}  activate
+ exit-address-family
+!
+ exit
+ip route vrf vpn-azure-{{ item.vnet }}-vpn {{ item.az_bgp_ip }}  255.255.255.255 Tunnel{{ item.tunnel_id }}
+{% endfor %}
