@@ -43,8 +43,10 @@ router bgp 65555
   neighbor {{ item.az_bgp_ip }}  ebgp-multihop 255
   neighbor {{ item.az_bgp_ip }}  update-source Tunnel{{ item.tunnel_id }}
   neighbor {{ item.az_bgp_ip }}  activate
+  neighbor {{ item.az_bgp_ip }}  prefix-list FILTER in
  exit-address-family
 !
  exit
+ip prefix-list FILTER-{{ item.vnet }} seq 10 permit {{ item.vnet_cidr }}
 ip route vrf vpn-azure-{{ item.vnet }}-vpn {{ item.az_bgp_ip }}  255.255.255.255 Tunnel{{ item.tunnel_id }}
 {% endfor %}
