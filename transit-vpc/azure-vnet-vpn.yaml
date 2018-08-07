@@ -16,6 +16,7 @@
         tunnel_ip: '172.30.255.254'
         az_bgp_ip: '10.72.16.126'
         az_asn: '65515'
+        item.vnet_cidr: '10.72.16.0/20
 
         
   tasks:      
