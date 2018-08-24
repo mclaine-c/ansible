@@ -25,5 +25,5 @@
         
   tasks:      
     - name: Build IKEv2, IPSEC, BGP, VRF config to connect Azure VNet to AWS Transit CSR VPC
-      template: src=template/csr-transit-azure-vpn.set.j2 dest={{build_dir}}/csr-transit-azure-vpn.set
+      template: src=template/csr-transit-aws-vpn.set.j2 dest={{build_dir}}/csr-transit-aws-vpn.set
       with_items: csr_az_vpn_config
