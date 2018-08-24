@@ -25,7 +25,7 @@ interface Tunnel{{ item.tunnel1_int_id }}
  ip tcp adjust-mss 1387
  tunnel source GigabitEthernet1
  tunnel mode ipsec ipv4
- tunnel destination {{ item.tunnel2_ip }}
+ tunnel destination {{ item.tunnel1_ip }}
  tunnel protection ipsec profile ipsec-vpn-aws
  ip virtual-reassembly
 !
