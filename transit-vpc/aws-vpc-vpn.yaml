@@ -1,0 +1,24 @@
+---
+- name: Configure AWS Transit VPC CSR to Connect to Azure VNet
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+  
+  vars:
+    build_dir: "/tmp/"
+    csr_az_vpn_config:
+      - vnet: 'A50'
+        tunnel_id : '100'
+        azure_gw_ip: '23.96.51.115'
+        vpn_psk: 'MASKED'
+        aws_csr_ip: '50.16.134.96'
+        tunnel_ip: '172.30.255.254'
+        az_bgp_ip: '10.72.16.126'
+        az_asn: '65515'
+        item.vnet_cidr: '10.72.16.0/20
+        
+  tasks:      
+    - name: Build IKEv2, IPSEC, BGP, VRF config to connect Azure VNet to AWS Transit CSR VPC
+      template: src=template/csr-transit-azure-vpn.set.j2 dest={{build_dir}}/csr-transit-azure-vpn.set
+      with_items: csr_az_vpn_config
