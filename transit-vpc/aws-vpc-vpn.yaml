@@ -8,20 +8,20 @@
   vars:
     build_dir: "/tmp/"
     csr_aws_vpn_config:
-      - vpn_id: 'A50'
-        tunnel1_ip: '100'
-        vgw_id: ' '
-        acct_id: ' '
-        cgw_id: ' '
-        tunnel1_psk: ' '
-        tunnel1_bgp: ' '
-        tunnel2_bgp: ' '
-        tunnel1_int_ip: ' '
-        tunnel2_ip: '101'
-        tunnel2_psk: ' '
-        tunnel2_int_ip: ' '
-        tunnel1_int_id: ' '
-        tunnel2_int_id: ' '
+      - vpn_id: 'vpn-0241563d90c65018e'
+        tunnel1_ip: '18.232.26.223'
+        vgw_id: 'vgw-07aca039df5c7dfa0'
+        acct_id: '007426307744'
+        cgw_id: 'cgw-0e65414d7fc288391'
+        tunnel1_psk: 'ik3i_UlalGQO8KlkICKQYBKgrJJcQeUz'
+        tunnel1_bgp: '169.254.47.157'
+        tunnel2_bgp: '169.254.47.49'
+        tunnel1_int_ip: '169.254.47.158'
+        tunnel2_ip: '34.206.224.228'
+        tunnel2_psk: 'IgCKBxoPPp7Hky_yxq9IB.xjkWBlkhfK'
+        tunnel2_int_ip: '169.254.47.50'
+        tunnel1_int_id: '110'
+        tunnel2_int_id: '111'
         
   tasks:      
     - name: Build ISAKMP, IPSEC, BGP, VRF config to connect AWS VPC to AWS Transit CSR VPC
