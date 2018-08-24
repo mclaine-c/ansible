@@ -1,0 +1,59 @@
+{% for item in csr_aws_vpn_config %}
+ip vrf {{ item.vpn_id }}
+ rd 65555:{{ item.tunnel1_int_id }}
+ route-target export 65555:0
+ route-target import 65555:0
+!
+crypto keyring keyring-{{ item.vpn_id }}-{{ item.tunnel2_int_id }}
+  local-address GigabitEthernet1
+  pre-shared-key address {{ item.tunnel1_ip }} key {{ item.tunnel1_psk }}
+crypto keyring keyring-{{ item.vpn_id }}-{{ item.tunnel1_int_id }}
+  local-address GigabitEthernet1
+  pre-shared-key address {{ item.tunnel2_ip }} key {{ item.tunnel2_psk }}
+crypto isakmp profile isakmp-{{ item.vpn_id }}-{{ item.tunnel1_int_id }}
+   keyring keyring-{{ item.vpn_id }}-{{ item.tunnel1_int_id }}
+   match identity address {{ item.tunnel2_ip }} 255.255.255.255
+   local-address GigabitEthernet1
+crypto isakmp profile isakmp-{{ item.vpn_id }}-{{ item.tunnel2_int_id }}
+   keyring keyring-{{ item.vpn_id }}-{{ item.tunnel2_int_id }}
+   match identity address {{ item.tunnel1_ip }} 255.255.255.255
+   local-address GigabitEthernet1
+interface Tunnel{{ item.tunnel1_int_id }}
+ description {{ item.vpn_id }} from {{ item.vgw_id }} to {{ item.cgw_id }} for account {{ item.acct_id }}
+ ip vrf forwarding {{ item.vpn_id }}
+ ip address {{ item.tunnel1_int_ip }} 255.255.255.252
+ ip tcp adjust-mss 1387
+ tunnel source GigabitEthernet1
+ tunnel mode ipsec ipv4
+ tunnel destination {{ item.tunnel2_ip }}
+ tunnel protection ipsec profile ipsec-vpn-aws
+ ip virtual-reassembly
+!
+interface Tunnel{{ item.tunnel2_int_id }}
+ description {{ item.vpn_id }} from {{ item.vgw_id }} to {{ item.cgw_id }} for account {{ item.acct_id }}
+ ip vrf forwarding {{ item.vpn_id }}
+ ip address {{ item.tunnel2_int_ip }} 255.255.255.252
+ ip tcp adjust-mss 1387
+ tunnel source GigabitEthernet1
+ tunnel mode ipsec ipv4
+ tunnel destination {{ item.tunnel1_ip }}
+ tunnel protection ipsec profile ipsec-vpn-aws
+ ip virtual-reassembly
+!
+router bgp 65555
+ address-family ipv4 vrf {{ item.vpn_id }}
+  neighbor {{ item.tunnel1_bgp }} remote-as 64512
+  neighbor {{ item.tunnel1_bgp }} timers 10 30 30
+  neighbor {{ item.tunnel1_bgp }} activate
+  neighbor {{ item.tunnel1_bgp }} next-hop-self
+  neighbor {{ item.tunnel1_bgp }} as-override
+  neighbor {{ item.tunnel1_bgp }} soft-reconfiguration inbound
+  neighbor {{ item.tunnel2_bgp }} remote-as 64512
+  neighbor {{ item.tunnel2_bgp }} timers 10 30 30
+  neighbor {{ item.tunnel2_bgp }} activate
+  neighbor {{ item.tunnel2_bgp }} next-hop-self
+  neighbor {{ item.tunnel2_bgp }} as-override
+  neighbor {{ item.tunnel2_bgp }} soft-reconfiguration inbound
+ exit-address-family
+ !
+ {% endfor %}
