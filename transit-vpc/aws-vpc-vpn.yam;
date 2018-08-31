@@ -1,0 +1,29 @@
+---
+  - name: Configure AWS Transit VPC CSR to Connect to AWS VPC
+    hosts: localhost
+    connection: local
+    gather_facts: no
+    roles:
+
+    vars:
+      build_dir: "/tmp/"
+      csr_aws_vpn_config:
+        - vpn_id: 'VPN ID'
+          vgw_id: 'VGW ID'
+          cgw_id: 'CGW ID'
+          acct_id: 'AWS ACCOUNT'
+          tunnel1_ip: 'AWS VPN PUBLIC IP TUNNEL 1'
+          tunnel1_int_id: 'NUMBERIC VALUE OF TUNNEL INTERFACE FOR TUNNEL 1'
+          tunnel1_psk: 'TUNNEL 1 PSK'
+          tunnel1_bgp: 'BGP NEIGHBOR IP TUNNEL 1'
+          tunnel1_int_ip: 'TUNNEL INTERFACE IP'
+          tunnel2_ip: 'AWS VPN PUBLIC IP TUNNEL 2'
+          tunnel2_psk: 'TUNNEL 2 PSK'
+          tunnel2_bgp: 'BGP NEIGHBOR TUNNEL 2'
+          tunnel2_int_ip: 'TUNNEL INTERFACE IP'
+          tunnel2_int_id: 'NUMBERIC VALUE OF TUNNEL INTERFACE FOR TUNNEL2'
+
+    tasks:
+      - name: Build ISAKMP, IPSEC, BGP, VRF config to connect AWS VPC to AWS Transit CSR VPC
+        template: src=template/csr-transit-aws-vpn.set.j2 dest={{build_dir}}/csr-transit-aws-vpn.set
+        with_items: csr_az_vpn_config
